@@ -4,4 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\LedStrip\" />
+    <Folder Include="Services\Animation\" />
+    <Folder Include="Services\SpiBus\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotLed.Common\DotLed.Common.csproj" />
+  </ItemGroup>
+
 </Project>

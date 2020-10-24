@@ -378,7 +378,7 @@ namespace DotLed.Common.Drawing
 		/// This will convert the color to a hex string
 		/// </summary>
 		/// <returns></returns>
-		public override String ToString()
+		public override string ToString()
 		{
 			return $"#{BitConverter.ToString(new byte[] { _a, _r, _g, _b }).Replace("-", "")}";
 		}
@@ -413,7 +413,7 @@ namespace DotLed.Common.Drawing
 
 
 
-		public Boolean Equals(Color other)
+		public bool Equals(Color other)
 		{
 			throw new NotImplementedException();
 		}

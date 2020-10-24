@@ -1,7 +1,7 @@
 ﻿using System;
 
-using DotLed.Domain.Data.Devices;
 using DotLed.Domain.EventsArgs;
+using DotLed.Domain.Models;
 
 namespace DotLed.Domain.Services.Devices
 {
@@ -10,13 +10,13 @@ namespace DotLed.Domain.Services.Devices
 		/// <summary>
 		/// When a new file has been found.
 		/// </summary>
-		event EventHandler<NewDeviceFileEventArgs> NewFileFound;
+		event EventHandler<DeviceFileFoundEventArgs> NewFileFound;
 
 		/// <summary>
 		/// Gets all the device jons
 		/// </summary>
 		/// <returns></returns>
-		DeviceJsonFile[] GetDeviceJsonFiles();
+		Device[] GetDeviceJsonFiles();
 
 
 

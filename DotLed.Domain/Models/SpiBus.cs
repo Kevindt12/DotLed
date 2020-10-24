@@ -7,11 +7,20 @@ namespace DotLed.Domain.Models
 	public class SpiBus
 	{
 
+		/// <summary>
+		/// The spi bus id of the device.
+		/// </summary>
 		public int SpiBusId { get; set; }
 
+		/// <summary>
+		/// The chip enable id of the devcie
+		/// </summary>
 		public int ChipEnableId { get; set; }
 
-		public LedStrip AttachedDevice { get; set; }
+		/// <summary>
+		/// The led strip that is attached.
+		/// </summary>
+		public LedStrip AttachedDevice { get; protected set; }
 
 
 		/// <summary>
@@ -33,6 +42,12 @@ namespace DotLed.Domain.Models
 		public SpiBus()
 		{
 
+		}
+
+
+		public void AttachDevice(LedStrip ledStrip)
+		{
+			AttachedDevice = ledStrip;
 		}
 
 

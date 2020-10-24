@@ -46,7 +46,7 @@ namespace DotLed.Domain.Models
 				throw new InvalidOperationException($"Bus {bus} is already in use and cannot be used on a other strip until detached.");
 			}
 
-			bus.AttachedDevice = this;
+			bus.AttachDevice(this);
 			SpiBus = bus;
 		}
 

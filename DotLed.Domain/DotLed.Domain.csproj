@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Services\LedStrip\" />
-    <Folder Include="Services\Animation\" />
-    <Folder Include="Services\SpiBus\" />
   </ItemGroup>
 
   <ItemGroup>

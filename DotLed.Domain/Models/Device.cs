@@ -6,7 +6,6 @@ namespace DotLed.Domain.Models
 {
 	public class Device
 	{
-
 		/// <summary>
 		/// The device name.
 		/// </summary>
@@ -33,6 +32,13 @@ namespace DotLed.Domain.Models
 		public GpioPin[] GPIOPins { get; protected set; }
 
 		/// <summary>
+		/// Gets all the spi busses that exist on the device.
+		/// </summary>
+		/// <returns></returns>
+		public SpiBus[] GetSpiBusses { get; protected set; }
+
+
+		/// <summary>
 		/// This device.
 		/// </summary>
 		internal Device()
@@ -40,14 +46,6 @@ namespace DotLed.Domain.Models
 
 		}
 
-		/// <summary>
-		/// Gets all the spi busses that exist on the device.
-		/// </summary>
-		/// <returns></returns>
-		public SpiBus[] GetSpiBusses()
-		{
-			throw new NotImplementedException();
-		}
-
+		
 	}
 }

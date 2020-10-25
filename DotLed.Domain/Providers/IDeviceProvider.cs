@@ -2,7 +2,7 @@
 
 namespace DotLed.Domain.Services.Devices
 {
-	public interface IDeviceService
+	public interface IDeviceProvider
 	{
 
 

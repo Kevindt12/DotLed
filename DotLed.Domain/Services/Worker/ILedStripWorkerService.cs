@@ -2,5 +2,13 @@
 {
 	public interface ILedStripWorkerService
 	{
+
+
+
+
+
+
+
+
 	}
 }

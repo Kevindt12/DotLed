@@ -1,22 +1,17 @@
 ﻿using System;
 
-using DotLed.Domain.Interfaces;
-
 namespace DotLed.Domain.Models
 {
 
 	public delegate void AnimationSequenceAction(LedStrip ledStrip);
 
 
-	public class Animation : IAnimation
+	public class Animation
 	{
 		/// <summary>
 		/// The name of the animation.
 		/// </summary>
 		public string Name { get; set; }
-
-
-
 
 		/// <summary>
 		/// The actions that this annimation will play.
@@ -43,15 +38,7 @@ namespace DotLed.Domain.Models
 		}
 
 
-		public void StopAnimation()
-		{
 
-		}
-
-		public void PlayAnimation()
-		{
-			
-		}
 
 		
 		

@@ -8,7 +8,7 @@ namespace DotLed.Domain.Models
 		/// <summary>
 		/// The index of the led.
 		/// </summary>
-		public int Index { get; private set; }
+		public int Index { get; init; }
 
 		/// <summary>
 		/// The color of the led.

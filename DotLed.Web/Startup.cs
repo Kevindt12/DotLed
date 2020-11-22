@@ -1,6 +1,12 @@
+
+using System;
+
+using AutoMapper;
+
+using DotLed.Common.Startup;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,22 +16,43 @@ namespace DotLed.Web
 {
 	public class Startup
 	{
+		public StartupCollection StartupCollection { get; init; }
+
+
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
+
+			StartupCollection = new StartupCollection(configuration);
+
+			ConfigurePackageStartup(StartupCollection);
 		}
 
-		public IConfiguration Configuration { get; }
+		public void ConfigurePackageStartup(StartupCollection startupCollection)
+		{
+			startupCollection.AddStartUp<DotLed.Infrastructure.Startup>();
+		}
+
+		public IConfiguration Configuration { get; init; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			// Configures all the startups.
+			StartupCollection.ConfigureServices(services);
+
 			services.AddControllersWithViews();
 			// In production, the Angular files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{
 				configuration.RootPath = "ClientApp/dist";
 			});
+
+			
+
+			services.AddAutoMapper(cfg => cfg.ConstructServicesUsing() ,StartupCollection.GetAssemblies());
+
+			
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,5 +98,8 @@ namespace DotLed.Web
 				}
 			});
 		}
+
+
+
 	}
 }

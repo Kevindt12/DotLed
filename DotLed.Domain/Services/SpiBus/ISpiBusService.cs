@@ -12,7 +12,7 @@ namespace DotLed.Domain.Services.SpiBus
 		/// </summary>
 		/// <param name="pin"></param>
 		/// <returns></returns>
-		Models.SpiBus CreateSoftwareSPIBus(GpioPin pin);
+		Models.SpiBus CreateSoftwareSpiBus(GpioPin pin);
 
 
 		/// <summary>

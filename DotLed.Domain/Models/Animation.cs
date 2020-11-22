@@ -2,10 +2,6 @@
 
 namespace DotLed.Domain.Models
 {
-
-	public delegate void AnimationSequenceAction(LedStrip ledStrip);
-
-
 	public class Animation
 	{
 		/// <summary>
@@ -16,30 +12,21 @@ namespace DotLed.Domain.Models
 		/// <summary>
 		/// The actions that this annimation will play.
 		/// </summary>
-		public Action<LedStrip>[] Sequence { get; protected set; }
+		public AnimationSequence Sequence { get; init; }
 
-		/// <summary>
-		/// The led strip sequence.
-		/// </summary>
-		public LedStrip LedStrip { get; set; }
-
-		/// <summary>
-		/// Checks if the led strip is attached.
-		/// </summary>
-		public bool IsLedStripAttached => (LedStrip != null);
-
+		public int PlayFrequency { get; set; }
 
 		/// <summary>
 		/// A animation
 		/// </summary>
-		public Animation()
+		public Animation(AnimationSequence sequence)
 		{
-
+			Sequence = sequence ?? throw new ArgumentNullException(nameof(sequence), "The sequence of a animation cannot be null.");
 		}
 
 
 
-
+		
 		
 		
 

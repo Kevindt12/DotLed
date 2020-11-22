@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 using DotLed.Common.Drawing;
 using DotLed.Domain.Models;
@@ -59,7 +60,7 @@ namespace DotLed.Domain.Collections
 		/// <param name="colors">The colors you want to set on the leds.</param>
 		/// <param name="index">The index of led strip where to start changing the color.</param>
 		/// <param name="count">The amount of colors to read from the array</param>
-		public void SetColor(Color[] colors, int index, int count)
+		public void SetLedsColors(Color[] colors, int index, int count)
 		{
 			int arrayIndex = 0;
 			for (int i = index; i < (index + count > Length ? index + count : Length); i++) {
@@ -69,7 +70,43 @@ namespace DotLed.Domain.Collections
 				arrayIndex++;
 			}
 		}
-		
+
+		public Span<Color> GetColors()
+		{
+			return _leds.Select(x => x.Color).ToArray().AsSpan();
+		}
+
+
+		/// <summary>
+		/// Sets a set of colors.
+		/// </summary>
+		/// <param name="colors">The colors you want to set on the leds.</param>
+		/// <param name="index">The index of led strip where to start changing the color.</param>
+		/// <param name="count">The amount of colors to read from the array</param>
+		public void SetLedsColors(Span<Color> colors)
+		{
+			for (int i = 0; i < colors.Length || i < Length; i++)
+			{
+				_leds[i].Color = colors[i];
+			}
+		}
+
+
+		public void Clear()
+		{
+			// Sets all leds to a black color
+			_leds.ToList().ForEach(x => x.Color = new Color(0));
+		}
+
+		/// <summary>
+		/// Sets a single led to a spesfic color.
+		/// </summary>
+		/// <param name="index"></param>
+		/// <param name="color"></param>
+		public void SetLedColor(int index, Color color)
+		{
+			_leds[index].Color = color;
+		}
 
 
 	}

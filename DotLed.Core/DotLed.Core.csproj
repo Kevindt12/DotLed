@@ -1,7 +1,30 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
+  <LangVersion>9.0</LangVersion>
+  <Configurations>Debug;Release;Debug Remote</Configurations>
+  <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotLed.Common\DotLed.Common.csproj" />
+    <ProjectReference Include="..\DotLed.Domain\DotLed.Domain.csproj" />
+    <ProjectReference Include="..\DotLed.Infrastructure\DotLed.Infrastructure.csproj" />
+    <ProjectReference Include="..\DotLed.Persistance\DotLed.Persistance.csproj" />
+  </ItemGroup>
 
 </Project>

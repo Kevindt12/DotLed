@@ -1,16 +1,26 @@
-﻿using System;
+﻿
+using System;
 
 using DotLed.Domain.Collections;
+using DotLed.Domain.Services.LedStrips;
 
 namespace DotLed.Domain.Models
 {
 	public class LedStrip
 	{
 
+		public ILedStripColorArrayNormalizer LedStripColorArrayNormalizer { get; init; }
+
+
+		/// <summary>
+		/// The name of the ledstrip.
+		/// </summary>
+		public string Name { get; init; }
+
 		/// <summary>
 		/// the leds on the strip.
 		/// </summary>
-		public LedArray Leds { get; protected set; }
+		public LedArray Leds { get; init; }
 
 		/// <summary>
 		/// This is a value between 0 - 255 for the max brightness.
@@ -20,43 +30,42 @@ namespace DotLed.Domain.Models
 		/// <summary>
 		/// Spi Bus that is connected to the led strip.
 		/// </summary>
-		public SpiBus SpiBus { get; protected set; }
+		public SpiBus SpiBus { get; set; }
 
+
+		
 
 
 		/// <summary>
 		/// The led strip of the application.
 		/// </summary>
 		/// <param name="ledCount"></param>
-		public LedStrip(int ledCount)
+		public LedStrip(ILedStripColorArrayNormalizer normalizer, int ledCount)
 		{
 			Leds = new LedArray(ledCount);
 		}
 
 
 
-		/// <summary>
-		/// Attaching a SPI bus.
-		/// </summary>
-		/// <param name="bus"></param>
-		public void AttachSpiBus(SpiBus bus)
+
+		public void Update()
 		{
-			// Making sure that the bus is not allready in use.
-			if(bus.AttachedDevice != null) {
-				throw new InvalidOperationException($"Bus {bus} is already in use and cannot be used on a other strip until detached.");
+			// Check to make sure the spi bus is connected
+			if(!SpiBus?.Connected ?? false)
+			{
+				throw new InvalidOperationException($"Cannot update the led strip on the {SpiBus?.SpiBusId}:{SpiBus?.ChipEnableId} becouse its not connected.");
 			}
 
-			bus.AttachDevice(this);
-			SpiBus = bus;
+			// Writes the led strip data to the bus.
+			SpiBus.Write(LedStripColorArrayNormalizer.GetBytes(Leds.GetColors()));
+
 		}
 
-		/// <summary>
-		/// Detacheds the spi bus.
-		/// </summary>
-		public void DetachedSpiBus()
+		public void Clear()
 		{
-			SpiBus.DetachDevice();
-			SpiBus = null;
+			Leds.Clear();
+
+			Update();
 		}
 
 
